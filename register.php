@@ -1,9 +1,7 @@
 <?php
-require '_includes/connect.php';
-// require '_includes/header.php';
+include '_includes/connect.php';
 
-if($_POST)
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $uid = $_POST['uid'];
     $name = $_POST['name'];
     $cnic = $_POST['cnic'];
@@ -11,37 +9,48 @@ if($_POST)
     $pass = $_POST['pass'];
     $phone = $_POST['phone'];
 
-
     $stmt = $connection->prepare("INSERT INTO register (uid, name, cnic, email, pass, phone) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssi", $uid, $name, $cnic, $email, $pass, $phone);
-    
-  $stmt->execute();
-  
-  if($stmt->affected_rows > 0)
-  {
-    echo "<script>alert('Registration Successful ');</script>";
-    echo "<script>window.location.href = 'login.php';</script>";
-    exit;
-  }
+    $stmt->bind_param("ssssss", $uid, $name, $cnic, $email, $pass, $phone);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Registration Successful');</script>";
+        echo "<script>window.location.href = 'login.php';</script>";
+        exit;
+    } else {
+        echo "<script>alert('Registration Failed');</script>";
+    }
 }
 ?>
-<!--_______________________________________ -->
 
+ <!-- #region -->
 
-<div class="row">
-          <!-- left column -->
-          <div class="col-md-10">
-            <!-- general form elements -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title"></h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form role='form'method="post">
-                <div class="card-body">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MS Electrical</title>
+  <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+ <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- icheck bootstrap -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+<!-- AdminLTE Theme style -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
 
-                <div class="form-group">
+</head>
+
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-body">
+
+      <form role='form'method="post">
+
+      <div class="form-group">
                 <label for="uid">User ID</label>
                 <div class="input-group">
                 <div class="input-group-prepend">
@@ -51,6 +60,7 @@ if($_POST)
                 </div>
                 </div>
 
+        
                   <div class="form-group">
                     <label for="name">Full Name</label>
                     <div class="input-group">
@@ -58,9 +68,10 @@ if($_POST)
                     <span class="input-group-text"><i class=" fas fa-solid fa-signature"></i></span>
                     </div>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name">
-                  </div></div>
+                  </div>
+                </div>
 
-                  <div class="form-group">
+                <div class="form-group">
                     <label for="cnic">CNIC</label>
                     <div class="input-group">
                     <div class="input-group-prepend">
@@ -78,7 +89,6 @@ if($_POST)
                       cnicInput.value = formattedCnic;
                     });
                   </script>
-
 
                   <div class="form-group">
                     <label for="email">Email Address</label>
@@ -99,9 +109,7 @@ if($_POST)
                     </div>
                 </div>
                   
-                  
-
-                  <div class="form-group">
+                <div class="form-group">
                     <label for="phone">Phone No</label>
                     <div class="input-group">
                     <div class="input-group-prepend">
@@ -116,23 +124,41 @@ if($_POST)
                       phoneInput.value = phoneValue;
                     });
                   </script>
-                </div>
-                <!-- /.card-body -->
 
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+     
+
+      <div class="social-auth-links text-center mt-2 mb-3">
+        <button type="submit" href="#" class="btn btn-block btn-primary">
+         <!--  <i class="fab fa-facebook mr-2"></i> --> Login 
+        </button>
+         </form>
         
-<!-- _________________________________________________________________________ -->
       </div>
-    <!-- /.container-fluid -->
-    </section>
+
     </div>
-  <!-- /.content-wrapper -->
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
 
- 
+<script>
+    function togglePassword() {
+      var passwordField = document.getElementById("pass");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+  </script>
+<!-- jQuery -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+<!-- AdminLTE App -->
+<!-- <script src="dist/js/adminlte.min.js"></script> -->
+</body>
+</html>

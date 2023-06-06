@@ -46,9 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="" class="h1"><b>Ncai</b> Peshawar</a>
-    </div>
     <div class="card-body">
 
       <form role='form'method="post">
