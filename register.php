@@ -128,9 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      
 
       <div class="social-auth-links text-center mt-2 mb-3">
-        <button type="submit" href="#" class="btn btn-block btn-primary">
-         <!--  <i class="fab fa-facebook mr-2"></i> --> Login 
-        </button>
+        <button type="submit" href="#" class="btn btn-block btn-primary"> Register </button>
          </form>
         
       </div>
