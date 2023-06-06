@@ -92,6 +92,7 @@ echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
         <input type="password" class="form-control" placeholder="Password" name="password" id="pass">
         <div class="input-group-append">

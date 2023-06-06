@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class=" fas fa-solid fa-signature"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name" required>
                   </div>
                 </div>
 
@@ -96,16 +96,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-solid fa-envelope"></i></span>
                     </div>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                   </div></div>
 
                   <div class="form-group">
                     <label for="pass">Password</label>
                     <div class="input-group">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-solid fa-lock"></i></span>
-                        </div>
-                        <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter Password">
+                    <div class="input-group-append">
+                    <div class="input-group-text">
+                    <span class="fas fa-eye toggle-password" onclick="togglePassword()"></span>
+                    </div>
+                    </div>
+                        <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter Password" required>
                     </div>
                 </div>
                   
@@ -115,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class=" fas fa-solid fa-phone"></i></span>
                     </div>
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone No">
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone No" required>
                   </div></div>
                   <script>
                     var phoneInput = document.getElementById('phone');
