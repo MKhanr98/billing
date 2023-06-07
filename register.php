@@ -6,10 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $cnic = $_POST['cnic'];
     $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $pass = $_POST['password'];
     $phone = $_POST['phone'];
 
-    $stmt = $connection->prepare("INSERT INTO register (uid, name, cnic, email, pass, phone) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $connection->prepare("INSERT INTO register (uid, name, cnic, email, password, phone) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssss", $uid, $name, $cnic, $email, $pass, $phone);
 
     if ($stmt->execute()) {
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span class="fas fa-eye toggle-password" onclick="togglePassword()"></span>
                     </div>
                     </div>
-                        <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter Password" required>
+                        <input type="password" class="form-control" id="passord" name="password" placeholder="Enter Password" required>
                     </div>
                 </div>
                   
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script>
     function togglePassword() {
-      var passwordField = document.getElementById("pass");
+      var passwordField = document.getElementById("password");
       if (passwordField.type === "password") {
         passwordField.type = "text";
       } else {

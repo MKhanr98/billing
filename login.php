@@ -9,7 +9,7 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $stmt = mysqli_prepare($connection, "SELECT * FROM admin WHERE username = ? AND password = ?");
+    $stmt = mysqli_prepare($connection, "SELECT * FROM admin WHERE email = ? AND password = ?");
     mysqli_stmt_bind_param($stmt, "ss", $email, $password);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -24,7 +24,7 @@
       $_SESSION['email']=$email;
 
       // Retrieve the name of the admin from the database
-        $query = "SELECT Name,id FROM admin WHERE username = ?";
+        $query = "SELECT Name,id FROM admin WHERE email = ?";
         $stmt = mysqli_prepare($connection, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
