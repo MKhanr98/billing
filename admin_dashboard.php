@@ -162,28 +162,24 @@ background-color: red;
                           </p>
                           <p class="percent">
                             
-                              </svg>
+                              <!-- </svg> -->
                           </p>
                       </div>
                       <div class="data">
-                          
-                                  <?php
-                                  $conn = mysqli_connect("localhost", "root", "", "cash");
 
-                                  // Calculate the initial total amount from the 'cin' table
-                                  $sql = "SELECT SUM(cash) AS totalAmount FROM cin";
-                                  $res = mysqli_query($conn, $sql);
-                                  $row = mysqli_fetch_assoc($res);
-                                  $totalAmount = $row['totalAmount'];
-                                                            
-                                  echo "<p> Rs $totalAmount</p>";
-                                  
-
-                                  ?>
-<div class="range">
-            <div class="fill">
-            </div>
-        </div>
+                        <?php
+                        $conn = mysqli_connect("localhost", "root", "", "cash");
+                        // Calculate the initial total amount from the 'cin' table
+                        $sql = "SELECT SUM(cash) AS totalAmount FROM cin";
+                        $res = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($res);
+                        $totalAmount = $row['totalAmount'];
+                        echo "<p> Rs $totalAmount</p>";
+                        ?>
+                      <div class="range">
+                          <div class="fill">
+                          </div>
+                      </div>
 
                       </div>
                 </div>
