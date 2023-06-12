@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Cash Deposit </h1>
+            <h1 class="m-0">Package </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Deposit Data</li>
+              <li class="breadcrumb-item active">Package Data</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -42,14 +42,15 @@
                 <div class="card-body">
                   <div class="row">
 
+                
                   <div class="form-group col-md-6">
-                  <label for="cash">Cash Amount</label>
-                  <input type="number" class="form-control" id="cash" name="cash" placeholder="Enter amount" required>
+                  <label for="name">Package Name</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                   </div>
 
                   <div class="form-group col-md-6">
-                  <label for="cheque">Cheque</label>
-                  <input type="text" class="form-control" id="cheque" name="cheque" placeholder="Cheque No" required>
+                  <label for="price">Price</label>
+                  <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" required>
                   </div>
 
                               
@@ -64,13 +65,15 @@
               <!-- </div> -->
 
               <div class="form-group col-md-6">
-                  <label for="date">Date</label>
-                  <input type="date" class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" required>
-                  
-                  <small id="dateHelp" class="form-text text-muted">Please select a date.</small>
+                <label for="duration">Duration</label>
+                <select class="form-control" id="duration" name="duration" required>
+                  <option value="1">1 day</option>
+                  <option value="2">2 days</option>
+                  <option value="7">7 days</option>
+                  <option value="30">30 days</option>
+                </select>
               </div>
-
-              
+  
                 <div class="form-group col-md-6">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" placeholder="......." rows="4"></textarea>
@@ -103,12 +106,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Cash Amount</th>
-                    <th>Cheque No</th>
-                    <th>Person</th>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Action</th>
+                  <th>Package Name </th>
+                  <th>Price</th>
+                  <th>Duration</th>
+                  <th>Description</th>
+                  <th>Action</th>
                     
                   </tr>
                   </thead>
@@ -143,7 +145,7 @@ if (result.isConfirmed) {
       if (response === 'success') {
         Swal.fire('Deleted!', 'The record has been deleted.', 'success');
         // Refresh the table
-        window.location.replace("cashin.php");
+        window.location.replace("pkg.php");
       } else {
         Swal.fire('Error!', 'Failed to delete the record.', 'error');
       }
@@ -159,10 +161,9 @@ if (result.isConfirmed) {
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th>Cash Amount</th>
-                  <th>Cheque No</th>
-                  <th>Person</th>
-                  <th>Date</th>
+                  <th>Package Name </th>
+                  <th>Price</th>
+                  <th>Duration</th>
                   <th>Description</th>
                   <th>Action</th>
                     

@@ -13,7 +13,7 @@ if (!isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cash Flow Sys</title>
+  <title>Billing Sys</title>
   <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
  
 <!--  -->
