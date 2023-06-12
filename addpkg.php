@@ -1,5 +1,21 @@
 <?php include '_includes/header.php'; ?>
-
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $name = $_POST['name'];
+  $price = (int)$_POST['price'];
+  $duration = $_POST['duration'];
+  $description = $_POST['description'];
+  
+  $stmt = $connection->prepare("INSERT INTO pkg (name, price, duration, description) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("sdis", $name, $price, $duration, $description);
+  
+  if ($stmt->execute()) {
+    echo "<script>alert('Record Added');</script>";
+  } else {
+    echo "<script>alert('Failed to add record');</script>";
+  }
+}
+?>
 <?php include '_includes/navbar.php'; ?>
 <?php include '_includes/sidebar.php'; ?>
 
@@ -68,7 +84,7 @@
                 <label for="duration">Duration</label>
                 <select class="form-control" id="duration" name="duration" required>
                   <option value="1">1 day</option>
-                  <option value="2">2 days</option>
+                  <option value="3">3 days</option>
                   <option value="7">7 days</option>
                   <option value="30">30 days</option>
                 </select>
@@ -116,11 +132,29 @@
                   </thead>
                   <tbody>
 
-                  <?php 
-                
-                  ?>
 
+                  <?php
+$q = mysqli_query($connection, "SELECT * FROM pkg") or die(mysqli_error($connection));
+while($row = mysqli_fetch_array($q))
+{
+  echo "<tr>";
+  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['price'] . "</td>";
+  echo "<td>" . $row['duration'] . "</td>";
+  echo "<td>" . $row['description'] . "</td>";
 
+  echo '<td style="text-align:center">
+          <a href="edit.php?id='.$row['id'].'&table=pkg&page=addpkg.php" class="btn btn-info">
+            <i class="fas fa-edit"></i>
+          </a>
+          <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'pkg\')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>';
+
+  echo "</tr>";
+}
+?>
 
 
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -145,7 +179,7 @@ if (result.isConfirmed) {
       if (response === 'success') {
         Swal.fire('Deleted!', 'The record has been deleted.', 'success');
         // Refresh the table
-        window.location.replace("pkg.php");
+        window.location.replace("addpkg.php");
       } else {
         Swal.fire('Error!', 'Failed to delete the record.', 'error');
       }

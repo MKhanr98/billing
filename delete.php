@@ -10,8 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST[
   // ...
 
   // Prepare the delete statement based on the provided table
-  if ($table === 'cin') {
-    $stmt = $connection->prepare("DELETE FROM cin WHERE id = ?");
+  if ($table === 'pkg') {
+    $stmt = $connection->prepare("DELETE FROM pkg WHERE id = ?");
 
   } elseif ($table === 'cout') {
     $stmt = $connection->prepare("DELETE FROM cout WHERE id = ?");

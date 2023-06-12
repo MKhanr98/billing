@@ -15,24 +15,28 @@ if (!$row) {
   die("Data not found.");
 }
 
-if($_POST) {
-  $cash = $_POST['cash'];
-  $person = $_POST['person'];
-  $date = $_POST['date'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // Get the form data
+  $name = $_POST['name'];
+  $price = (int)$_POST['price'];
+  $duration = $_POST['duration'];
   $description = $_POST['description'];
-  
-  $stmt = $connection->prepare("UPDATE $table SET cash=?, person=?, description=?, date=? WHERE id=?");
 
-  $stmt->bind_param("isssi", $cash, $person, $description, $date, $id);
+  // Prepare the update statement
+  $stmt = $connection->prepare("UPDATE pkg SET name = ?, price = ?, duration = ?, description = ? WHERE id = ?");
+  $stmt->bind_param("sdisi", $name, $price, $duration, $description, $id);
 
+  // Execute the update statement
   if ($stmt->execute()) {
     echo "<script>alert('Record Updated');</script>";
-    session_abort();
+    // Redirect back to the original page
+    header("Location: $page");
+    exit;
   } else {
     echo "<script>alert('Failed to update record');</script>";
   }
 
-  header("Location: $page");
+
 }
 
 ?>
@@ -49,7 +53,7 @@ if($_POST) {
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="admin_dashboard.php">Home</a></li>
               <li class="breadcrumb-item active">Edit</li>
             </ol>
           </div><!-- /.col -->
@@ -75,46 +79,42 @@ if($_POST) {
               <form role='form' method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="cash">Cash Amount</label>
-                    <input type="number" class="form-control" id="cash" name="cash" placeholder="Enter amount" value="<?php echo $row['cash']; ?>" required>
-                  </div>
-
-                  <?php if ($page == 'cashin.php') : ?>
-                    <div class="form-group col-md-6">
-                      <label for="cheque">Cheque No</label>
-                      <input type="text" class="form-control" id="cheque" name="cheque" placeholder="Cheque No" value="<?php echo $row['cheque']; ?>" required>
-                    </div>
-                  <?php endif; ?>
-
-                  <div class="form-group col-md-6">
-  <label for="person">Person</label>
-  <?php if ($table === 'personal'): ?>
-    <?php
-    $readonly = ($table === 'personal') ? 'readonly' : '';
-    ?>
-    <input type="text" class="form-control" name="person" value="Dr. Gul Muhammad" <?php echo $readonly; ?>>
-  <?php else: ?>
-    <select class="form-control select2" name="person" style="width:100%" required>
-      <?php
-      $sub_sql = "SELECT id, name FROM person";
-      $sub_result = mysqli_query($connection, $sub_sql);
-
-      while ($srow = mysqli_fetch_assoc($sub_result)) {
-        $selected = ($srow['name'] == $row['person']) ? 'selected' : '';
-        echo "<option value='" . $srow['name'] . "' $selected>" . $srow['name'] . "</option>";
-      }
-      ?>
-    </select>
-  <?php endif; ?>
-</div>
-
-
                   
                   <div class="form-group col-md-6">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" value="<?php echo $row['date']; ?>" required>
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<?php echo $row['name']; ?>" required>
                   </div>
+                  
+                  <div class="form-group col-md-6">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" value="<?php echo $row['price']; ?>" required>
+                  </div>
+<!-- 
+                  <?php //if ($page == 'cashin.php') : ?>
+                    <div class="form-group col-md-6">
+                      <label for="cheque">Cheque No</label>
+                      <input type="text" class="form-control" id="cheque" name="cheque" placeholder="Cheque No" value="<?php //echo $row['cheque']; ?>" required>
+                    </div>
+                  <?php //endif; ?> -->
+
+                  
+
+                  
+                  <style>
+                  .select2-container .select2-selection--single {
+                  height: 38px;
+                }
+                </style>
+                  <div class="form-group col-md-6">
+                    <label for="duration">Duration</label>
+                    <select class="form-control" id="duration" name="duration" required>
+                      <option value="1" <?php if ($row['duration'] == 1) echo 'selected'; ?>>1 day</option>
+                      <option value="3" <?php if ($row['duration'] == 2) echo 'selected'; ?>>3 days</option>
+                      <option value="7" <?php if ($row['duration'] == 7) echo 'selected'; ?>>7 days</option>
+                      <option value="30" <?php if ($row['duration'] == 30) echo 'selected'; ?>>30 days</option>
+                    </select>
+                  </div>
+
 
                   <div class="form-group col-md-12">
                     <label for="description">Description</label>
