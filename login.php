@@ -1,48 +1,81 @@
 <?php
-  include '_includes/connect.php';  
-  $login=0;
-  $invalid =0;
+include '_includes/connect.php';  
+$adminLogin = 0;
+$userLogin = 0;
+$invalid = 0;
 
-  if($_SERVER['REQUEST_METHOD']=='POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $email = $_POST['email'];
+  $password = $_POST['password'];
 
-    // $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+  // Check login as admin
+  $adminQuery = "SELECT * FROM admin WHERE email = ? AND password = ?";
+  $adminStmt = mysqli_prepare($connection, $adminQuery);
+  mysqli_stmt_bind_param($adminStmt, "ss", $email, $password);
+  mysqli_stmt_execute($adminStmt);
+  $adminResult = mysqli_stmt_get_result($adminStmt);
 
-    $stmt = mysqli_prepare($connection, "SELECT * FROM admin WHERE email = ? AND password = ?");
-    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if($result) {
-      $num= mysqli_num_rows($result);
-    
-      if($num>0)
-      {
-      $login=1;
+  if ($adminResult) {
+    $adminNum = mysqli_num_rows($adminResult);
+    if ($adminNum > 0) {
+      $adminLogin = 1;
       session_start();
-      $_SESSION['email']=$email;
+      $_SESSION['email'] = $email;
 
-      // Retrieve the name of the admin from the database
-        $query = "SELECT Name,id FROM admin WHERE email = ?";
-        $stmt = mysqli_prepare($connection, $query);
-        mysqli_stmt_bind_param($stmt, "s", $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $row = mysqli_fetch_assoc($result);
-        $name = $row['Name'];
-        $id = $row['id'];
+      // Retrieve the name and id of the admin from the database
+      $adminQuery = "SELECT Name, id FROM admin WHERE email = ?";
+      $adminStmt = mysqli_prepare($connection, $adminQuery);
+      mysqli_stmt_bind_param($adminStmt, "s", $email);
+      mysqli_stmt_execute($adminStmt);
+      $adminResult = mysqli_stmt_get_result($adminStmt);
+      $adminRow = mysqli_fetch_assoc($adminResult);
+      $adminName = $adminRow['Name'];
+      $adminId = $adminRow['id'];
 
-        // Store the name of the admin in a session variable
-        $_SESSION['name'] = $name;
-        $_SESSION['id'] = $id;
-      header('location:index.php');
-      }
-      else {
-      $invalid=1;
-      }
+      // Store the name and id of the admin in session variables
+      $_SESSION['name'] = $adminName;
+      $_SESSION['id'] = $adminId;
+
+      header('location: admin_dashboard.php');
+    } else {
+      $invalid = 1;
     }
   }
+
+  // Check login as user
+  $userQuery = "SELECT * FROM register WHERE email = ? AND password = ?";
+  $userStmt = mysqli_prepare($connection, $userQuery);
+  mysqli_stmt_bind_param($userStmt, "ss", $email, $password);
+  mysqli_stmt_execute($userStmt);
+  $userResult = mysqli_stmt_get_result($userStmt);
+
+  if ($userResult) {
+    $userNum = mysqli_num_rows($userResult);
+    if ($userNum > 0) {
+      $userLogin = 1;
+      session_start();
+      $_SESSION['email'] = $email;
+
+      // Retrieve the name and id of the user from the database
+      $userQuery = "SELECT Name, id FROM register WHERE email = ?";
+      $userStmt = mysqli_prepare($connection, $userQuery);
+      mysqli_stmt_bind_param($userStmt, "s", $email);
+      mysqli_stmt_execute($userStmt);
+      $userResult = mysqli_stmt_get_result($userStmt);
+      $userRow = mysqli_fetch_assoc($userResult);
+      $userName = $userRow['Name'];
+      $userId = $userRow['id'];
+
+      // Store the name and id of the user in session variables
+      $_SESSION['name'] = $userName;
+      $_SESSION['id'] = $userId;
+
+      header('location: user_dashboard.php');
+    } else {
+      $invalid = 1;
+    }
+  }
+}
 ?>
  <!-- #region -->
 
@@ -128,11 +161,7 @@ echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert
     <!-- <i class="fab fa-google-plus mr-2"></i> --> Sign Up 
   </a>
       </div>
-      <!-- /.social-auth-links -->
-<!-- 
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p> -->
+   
       <p class="mb-0">
         <a href="register.php" class="text-center">Register as new member</a>
       </p>

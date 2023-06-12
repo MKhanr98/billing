@@ -1,33 +1,5 @@
 <?php include '_includes/header.php'; ?>
-<?php
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-  $cash = $_POST['cash'];
-  $cheque = $_POST['cheque'];
-  $person = $_POST['person'];
-  $date = $_POST['date'];
-
-  $description = $_POST['description'];
-  
-
-//   if(isset($_SESSION['id'])) {
-//     $Admin_Id = $_SESSION['id'];
-//   }
-
-$stmt = $connection->prepare("INSERT INTO cin (cash, cheque, person, description, date) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("issss", $cash, $cheque, $person, $description, $date);
-
- 
-
-  if ($stmt->execute()) {
-    echo "<script>alert('Record Added');</script>";
-    session_abort();
-  } else {
-    echo "<script>alert('Failed to add record');</script>";
-  }
-}
-?>
 <?php include '_includes/navbar.php'; ?>
 <?php include '_includes/sidebar.php'; ?>
 
@@ -87,22 +59,7 @@ $stmt->bind_param("issss", $cash, $cheque, $person, $description, $date);
                 }
                 </style>
 
-                  
-              <div class="form-group col-md-6">
-                  <label for="person">Person</label>
-                  <select class="form-control select2" name="person" style="width:100%">
-                      <option value="" selected>..</option>
-                      <?php
-                      $sub_sql = "SELECT id, name FROM person";
-                      $sub_result = mysqli_query($connection, $sub_sql);
-
-                      while ($srow = mysqli_fetch_assoc($sub_result)) {
-                          echo "<option value='" . $srow['name'] . "'>" . $srow['name'] . "</option>";
-                      }
-                      ?>
-                  </select>
-              </div>
-
+                
                 <!-- /.form-group -->
               <!-- </div> -->
 
@@ -161,29 +118,7 @@ $stmt->bind_param("issss", $cash, $cheque, $person, $description, $date);
                 
                   ?>
 
-<?php
-$q = mysqli_query($connection, "SELECT * FROM cin") or die(mysqli_error($connection));
-while($row = mysqli_fetch_array($q))
-{
-  echo "<tr>";
-  echo "<td>".$row['cash']."</td>";
-  echo "<td>".$row['cheque']."</td>";
-  echo "<td>{$row['person']}</td>";
-  echo "<td>{$row['date']}</td>";
-  echo "<td>{$row['description']}</td>";
 
-  echo '<td style="text-align:center">
-          <a href="edit.php?id='.$row['id'].'&table=cin&page=cashin.php" class="btn btn-info">
-            <i class="fas fa-edit"></i>
-          </a>
-          <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'cin\')">
-            <i class="fas fa-trash"></i>
-          </button>
-        </td>';
-
-  echo "</tr>";
-}
-?>
 
 
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
