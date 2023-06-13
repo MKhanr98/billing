@@ -45,7 +45,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="admin_dashboard.php" class="nav-link active">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -54,16 +54,7 @@
             </a>
           </li>
         
-          <li class="nav-item">
-            <a href="addpkg.php" class="nav-link">
-            <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Add Package
-                <i class="right fas fa-angle-right"></i>
-              </p>
-            </a>
-            
-          </li>       
+                
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
