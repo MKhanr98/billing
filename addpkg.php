@@ -113,10 +113,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="col-12">
 
       <!-- table card start -->
-      <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title"></h3>
-              </div>
+<div class="card card-primary">
+    <div class="card-header">
+        <div class="form-group">
+            <label for="filter-duration">Filter by Duration:</label>
+            <select class="form-control" id="filter-duration" name="filter-duration">
+                <option value="">All</option>
+                <option value="1">1 day</option>
+                <option value="3">3 days</option>
+                <option value="7">7 days</option>
+                <option value="30">30 days</option>
+            </select>
+        </div>
+    </div>
+
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -221,3 +231,20 @@ if (result.isConfirmed) {
   </div>
   <!-- /.content-wrapper -->
 <?php include '_includes/table_footer.php'; ?>
+<script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        var table = $('#example1').DataTable();
+
+        // Apply filter when the select box value changes
+        $('#filter-duration').change(function() {
+            var filterValue = $(this).val();
+
+            if (filterValue !== '') {
+                table.column(2).search('^' + filterValue + '$', true, false).draw();
+            } else {
+                table.column(2).search('').draw();
+            }
+        });
+    });
+</script>
