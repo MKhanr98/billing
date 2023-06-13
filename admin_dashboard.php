@@ -40,12 +40,16 @@
 }
   .plan {
   border-radius: 16px;
-  box-shadow: 0 30px 30px -25px rgba(0, 38, 255, 0.205);
+  box-shadow: 0 30px 30px -25px rgba(26, 59, 249);
   padding: 10px;
-  background-color: #fff;
+  background-color: #3574cd73;
   color: #697e91;
   max-width: 300px;
   margin: 5px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
+
+.plan:hover {
+  transform: translateY(-5px) scale(1.05);
 }
 
 .plan strong {
@@ -156,6 +160,7 @@
   background-color: #4133B7;
 }
 </style>
+
 <div class="row">
 <?php 
 $sql= "SELECT * FROM pkg";
@@ -197,8 +202,8 @@ foreach($query as $r){
 				
 			</ul>
 			<div class="action">
-			<a class="button" href="subs.php">
-				View Subscribers
+			<a class="button" href="#">
+				Subscribe
 			</a>
 			</div>
 		</div>
@@ -206,6 +211,7 @@ foreach($query as $r){
 </div>
 <?php }} ?>
 </div>
+
 
 <!--  ---------------------------------------------------------------------------------------------------------------------------------->
       </div>

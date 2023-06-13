@@ -17,6 +17,8 @@ if (!isset($_SESSION['email'])) {
   <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
  
 <!--  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
 
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
