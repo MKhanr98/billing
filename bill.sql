@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 07:33 AM
+-- Generation Time: Jun 13, 2023 at 07:04 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -44,6 +44,29 @@ INSERT INTO `admin` (`id`, `Name`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pkg`
+--
+
+CREATE TABLE `pkg` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `duration` text NOT NULL,
+  `price` int(11) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pkg`
+--
+
+INSERT INTO `pkg` (`id`, `name`, `duration`, `price`, `description`) VALUES
+(8, 'daily pro', '1', 100, '100mb net'),
+(9, 'weekly pro', '7', 250, '100mins'),
+(11, 'monthly pro', '30', 500, '10gb');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `register`
 --
 
@@ -62,7 +85,7 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `uid`, `name`, `cnic`, `email`, `password`, `phone`) VALUES
-(17, '1603', 'Muhammad Khan', '17101-4294073-7', 'ali@gmail.com', 'ali12', 2147483647);
+(17, '1603', 'Alisher', '17101-4294073-7', 'ali@gmail.com', 'ali12', 2147483647);
 
 --
 -- Indexes for dumped tables
@@ -72,6 +95,12 @@ INSERT INTO `register` (`id`, `uid`, `name`, `cnic`, `email`, `password`, `phone
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pkg`
+--
+ALTER TABLE `pkg`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -89,6 +118,12 @@ ALTER TABLE `register`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `pkg`
+--
+ALTER TABLE `pkg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `register`
