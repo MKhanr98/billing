@@ -197,8 +197,8 @@ foreach($query as $r){
 				
 			</ul>
 			<div class="action">
-			<a class="button" href="#">
-				Subscribe
+			<a class="button" href="subs.php">
+				View Subscribers
 			</a>
 			</div>
 		</div>
