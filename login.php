@@ -1,7 +1,7 @@
 <?php
 include '_includes/connect.php';  
-$adminLogin = 0;
-$userLogin = 0;
+// $adminLogin = 0;
+// $userLogin = 0;
 $invalid = 0;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,23 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($adminResult) {
     $adminNum = mysqli_num_rows($adminResult);
     if ($adminNum > 0) {
-      $adminLogin = 1;
+      // $adminLogin = 1;
       session_start();
       $_SESSION['email'] = $email;
 
       // Retrieve the name and id of the admin from the database
-      $adminQuery = "SELECT Name, id FROM admin WHERE email = ?";
-      $adminStmt = mysqli_prepare($connection, $adminQuery);
-      mysqli_stmt_bind_param($adminStmt, "s", $email);
-      mysqli_stmt_execute($adminStmt);
-      $adminResult = mysqli_stmt_get_result($adminStmt);
+      // $adminQuery = "SELECT Name, id FROM admin WHERE email = ?";
+      // $adminStmt = mysqli_prepare($connection, $adminQuery);
+      // mysqli_stmt_bind_param($adminStmt, "s", $email);
+      // mysqli_stmt_execute($adminStmt);
+      // $adminResult = mysqli_stmt_get_result($adminStmt);
       $adminRow = mysqli_fetch_assoc($adminResult);
-      $adminName = $adminRow['Name'];
-      $adminId = $adminRow['id'];
+      // $adminName = $adminRow['Name'];
+      // $adminId = $adminRow['id'];
 
       // Store the name and id of the admin in session variables
-      $_SESSION['name'] = $adminName;
-      $_SESSION['id'] = $adminId;
+      $_SESSION['name'] =  $adminRow['name'];
+      $_SESSION['id'] = $adminRow['id'];
 
       header('location: admin_dashboard.php');
     } else {
@@ -52,23 +52,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($userResult) {
     $userNum = mysqli_num_rows($userResult);
     if ($userNum > 0) {
-      $userLogin = 1;
+      // $userLogin = 1;
       session_start();
       $_SESSION['email'] = $email;
 
       // Retrieve the name and id of the user from the database
-      $userQuery = "SELECT Name, id FROM register WHERE email = ?";
-      $userStmt = mysqli_prepare($connection, $userQuery);
-      mysqli_stmt_bind_param($userStmt, "s", $email);
-      mysqli_stmt_execute($userStmt);
-      $userResult = mysqli_stmt_get_result($userStmt);
+      // $userQuery = "SELECT Name, id FROM register WHERE email = ?";
+      // $userStmt = mysqli_prepare($connection, $userQuery);
+      // mysqli_stmt_bind_param($userStmt, "s", $email);
+      // mysqli_stmt_execute($userStmt);
+      // $userResult = mysqli_stmt_get_result($userStmt);
       $userRow = mysqli_fetch_assoc($userResult);
-      $userName = $userRow['Name'];
-      $userId = $userRow['id'];
+      // $userName =;
+      // $userId = ;
 
       // Store the name and id of the user in session variables
-      $_SESSION['name'] = $userName;
-      $_SESSION['id'] = $userId;
+      $_SESSION['name'] =  $userRow['name'];
+      $_SESSION['id'] = $userRow['id'];
 
       header('location: user_dashboard.php');
     } else {
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MS Electrical</title>
+  <title>Billing Sys</title>
   <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
