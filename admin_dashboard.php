@@ -29,6 +29,15 @@
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
 <style>
+@media screen and (max-width: 480px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .col-6{
+  max-width: 75%;
+  }
+}
   .plan {
   border-radius: 16px;
   box-shadow: 0 30px 30px -25px rgba(0, 38, 255, 0.205);
@@ -146,7 +155,6 @@
 .plan .button:hover, .plan .button:focus {
   background-color: #4133B7;
 }
-
 </style>
 <div class="row">
 <?php 
@@ -159,51 +167,6 @@ foreach($query as $r){
 ?>
 
           <div class="col-lg-3 col-6">
-<div class="plan">
-		<div class="inner">
-			<span class="pricing">
-				<span>
-					Rs <?php echo $r['price'];?>
-				</span>
-			</span>
-			<p class="title"><?php echo ucwords($r['name']);?></p>
-			<ul class="features">
-				<li>
-					<span class="icon">
-						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h24v24H0z" fill="none"></path>
-							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-						</svg>
-					</span>
-					<span><strong><?php echo $r['duration'];?></strong> Day(s)</span>
-				</li>
-				<li>
-					<span class="icon">
-						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h24v24H0z" fill="none"></path>
-							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-						</svg>
-					</span>
-					<span><strong><?php echo ucwords($r['description']);?></strong></span>
-				</li>
-				
-			</ul>
-			<div class="action">
-			<a class="button" href="#">
-				Subscribe
-			</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
-
-
-
-
-<div class="col-lg-3 col-6">
 <div class="plan">
 		<div class="inner">
 			<span class="pricing">
