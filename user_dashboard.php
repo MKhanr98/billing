@@ -161,6 +161,19 @@
 .plan .button:hover, .plan .button:focus {
   background-color: #4133B7;
 }
+.swal2-container.swal2-center>.swal2-popup {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    border: 8px solid #3574cd73;
+    border-radius: 20px;
+    border-radius: 16px;
+  box-shadow: 0 30px 30px -25px rgba(26, 59, 249);
+  padding: 10px;
+  
+  
+}
 </style>
 
 <div class="row">
