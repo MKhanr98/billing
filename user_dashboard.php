@@ -203,11 +203,51 @@ foreach($query as $r){
 				</li>
 				
 			</ul>
-			<div class="action">
-			<a class="button" href="#">
-				Subscribe
-			</a>
-			</div>
+			<!-- ------------------------ -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+      <div class="action">
+    <a class="button" href="#" onclick="showConfirmation()">
+      Subscribe
+    </a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+  <script>
+    function showConfirmation() {
+    Swal.fire({
+    title: 'Subscribe',
+    html:
+      `<p>Are you sure you want to subscribe?</p>
+      <div>
+        <label for="paymentMethod">Payment Method:</label>
+        <select id="paymentMethod">
+          <option value="creditCard">Credit Card</option>
+          <option value="Easy Paisa">Easy Paisa</option>
+          <option value="Jazz Cash">Jazz Cash</option>
+        </select>
+      </div>`,
+    showCancelButton: true,
+    confirmButtonText: 'Confirm Subscription',
+    cancelButtonText: 'Cancel',
+    showLoaderOnConfirm: true,
+    preConfirm: () => {
+      const paymentMethod = document.getElementById('paymentMethod').value;
+      return { paymentMethod: paymentMethod };
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const paymentMethod = result.value.paymentMethod;
+      Swal.fire({
+        title: 'Success!',
+        text: `You have successfully subscribed using ${paymentMethod}!`,
+        icon: 'success'
+      });
+    }
+  });
+}
+  </script>
+      <!-- --------------------------- -->
 		</div>
 	</div>
 </div>
