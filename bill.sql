@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 07:16 AM
+-- Generation Time: Jun 15, 2023 at 06:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
-  `Name` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -38,7 +38,7 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `Name`, `email`, `password`) VALUES
+INSERT INTO `admin` (`id`, `name`, `email`, `password`) VALUES
 (4, 'mkhan', 'mk@gmail.com', 'mk12');
 
 -- --------------------------------------------------------
@@ -60,9 +60,9 @@ CREATE TABLE `pkg` (
 --
 
 INSERT INTO `pkg` (`id`, `name`, `duration`, `price`, `description`) VALUES
-(8, 'daily pro', '1', 100, '100mb net'),
-(9, 'weekly pro', '7', 250, '100mins'),
-(11, 'monthly pro', '30', 500, '10gb');
+(12, 'Daily Pro', '1', 100, '100 mb'),
+(13, 'Weekly Max', '7', 420, '1GB'),
+(14, 'monthly pro', '30', 900, '60 Gb ultra pro max');
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,22 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `uid`, `name`, `cnic`, `email`, `password`, `phone`) VALUES
-(17, '1603', 'Alisher', '17101-4294073-7', 'ali@gmail.com', 'ali12', 2147483647);
+(17, '1603', 'Alisher', '17101-4294073-7', 'ali@gmail.com', 'ali12', 2147483647),
+(19, '420', 'Ayub', '98409-2182382-3', 'ab@gmail.com', 'ab12', 2147483647);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subs`
+--
+
+CREATE TABLE `subs` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `phone` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -110,6 +125,12 @@ ALTER TABLE `register`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subs`
+--
+ALTER TABLE `subs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -123,12 +144,18 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `pkg`
 --
 ALTER TABLE `pkg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `subs`
+--
+ALTER TABLE `subs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
