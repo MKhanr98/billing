@@ -1,21 +1,4 @@
 <?php include '_includes/header.php'; ?>
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $name = $_POST['name'];
-  $price = (int)$_POST['price'];
-  $duration = $_POST['duration'];
-  $description = $_POST['description'];
-  
-  $stmt = $connection->prepare("INSERT INTO pkg (name, price, duration, description) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("sdis", $name, $price, $duration, $description);
-  
-  if ($stmt->execute()) {
-    echo "<script>alert('Record Added');</script>";
-  } else {
-    echo "<script>alert('Failed to add record');</script>";
-  }
-}
-?>
 <?php include '_includes/navbar.php'; ?>
 <?php include '_includes/sidebar.php'; ?>
 
