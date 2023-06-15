@@ -1,13 +1,14 @@
 <?php include '_includes/header.php'; ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $id = $_SESSION['id'];
   $name = $_POST['name'];
   $price = (int)$_POST['price'];
   $duration = $_POST['duration'];
   $description = $_POST['description'];
   
-  $stmt = $connection->prepare("INSERT INTO pkg (name, price, duration, description) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("sdis", $name, $price, $duration, $description);
+  $stmt = $connection->prepare("INSERT INTO pkg (name, price, duration, description, admin_id) VALUES (?, ?, ?, ?, ?)");
+  $stmt->bind_param("sdisi", $name, $price, $duration, $description, $id);
   
   if ($stmt->execute()) {
     echo "<script>alert('Record Added');</script>";

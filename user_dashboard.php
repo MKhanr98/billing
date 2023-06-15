@@ -1,7 +1,6 @@
 <?php include '_includes/header.php'; ?>
 <?php include '_includes/navbar.php'; ?>
 <?php include '_includes/sidebaruser.php'; ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -175,96 +174,116 @@
 }
 </style>
 
-<div class="row">
-<?php 
-$sql= "SELECT * FROM pkg";
-$query= mysqli_query($connection, $sql);
-if (mysqli_num_rows($query)>0){
+      <div class="row">
+        <?php 
+        $sql = "SELECT * FROM pkg";
+        $query = mysqli_query($connection, $sql);
+        if (mysqli_num_rows($query) > 0) {
+          foreach ($query as $r) {
+            ?>
+            <div class="col-lg-3 col-6">
+              <div class="plan">
+                <div class="inner">
+                  <span class="pricing">
+                    <span>
+                      Rs <?php echo $r['price']; ?>
+                    </span>
+                  </span>
+                  <p class="title"><?php echo ucwords($r['name']); ?></p>
+                  <ul class="features">
+                    <li>
+                      <span class="icon">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                        </svg>
+                      </span>
+                      <span><strong><?php echo $r['duration'];?></strong> Day(s)</span>
+                    </li>
+                    <li>
+                      <span class="icon">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                        </svg>
+                      </span>
+                      <span><strong><?php echo ucwords($r['description']);?></strong></span>
+                    </li>
+                  </ul>
+                  <!-- ------------------------ -->
+                  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+                  <div class="action">
+                    <a class="button" href="#" onclick="showConfirmation(<?php echo $_SESSION['id']; ?>, <?php echo $r['id']; ?>)">
+                      Subscribe
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <?php 
+          }
+        } ?>
+      </div>
 
-foreach($query as $r){
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
 
-?>
-
-          <div class="col-lg-3 col-6">
-<div class="plan">
-		<div class="inner">
-			<span class="pricing">
-				<span>
-					Rs <?php echo $r['price'];?>
-				</span>
-			</span>
-			<p class="title"><?php echo ucwords($r['name']);?></p>
-			<ul class="features">
-				<li>
-					<span class="icon">
-						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h24v24H0z" fill="none"></path>
-							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-						</svg>
-					</span>
-					<span><strong><?php echo $r['duration'];?></strong> Day(s)</span>
-				</li>
-				<li>
-					<span class="icon">
-						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h24v24H0z" fill="none"></path>
-							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-						</svg>
-					</span>
-					<span><strong><?php echo ucwords($r['description']);?></strong></span>
-				</li>
-				
-			</ul>
-			<!-- ------------------------ -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
-      <div class="action">
-    <a class="button" href="#" onclick="showConfirmation()">
-      Subscribe
-    </a>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
-  <script>
-    function showConfirmation() {
+<script>
+  function showConfirmation(user_id, pkg_id) {
     Swal.fire({
-    title: 'Subscribe',
-    html:
-      `<p>Are you sure you want to subscribe?</p>
+      title: 'Subscribe',
+      html: `
+      <p>Are you sure you want to subscribe?</p>
       <div>
         <label for="paymentMethod">Payment Method:</label>
         <select id="paymentMethod">
-          <option value="creditCard">Credit Card</option>
+          <option value="Credit Card">Credit Card</option>
           <option value="Easy Paisa">Easy Paisa</option>
           <option value="Jazz Cash">Jazz Cash</option>
         </select>
       </div>`,
-    showCancelButton: true,
-    confirmButtonText: 'Confirm Subscription',
-    cancelButtonText: 'Cancel',
-    showLoaderOnConfirm: true,
-    preConfirm: () => {
-      const paymentMethod = document.getElementById('paymentMethod').value;
-      return { paymentMethod: paymentMethod };
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const paymentMethod = result.value.paymentMethod;
-      Swal.fire({
-        title: 'Success!',
-        text: `You have successfully subscribed using ${paymentMethod}!`,
-        icon: 'success'
-      });
-    }
-  });
-}
-  </script>
-      <!-- --------------------------- -->
-		</div>
-	</div>
-</div>
-<?php }} ?>
-</div>
+      showCancelButton: true,
+      confirmButtonText: 'Confirm Subscription',
+      cancelButtonText: 'Cancel',
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const paymentMethod = document.getElementById('paymentMethod').value;
+        return {
+          paymentMethod: paymentMethod
+        };
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const paymentMethod = result.value.paymentMethod;
+        // Send AJAX request to store the subscription data
+        $.ajax({
+          url: 'subscription.php',
+          type: 'POST',
+          data: {
+            user_id : user_id,
+            pkg_id : pkg_id,
+            paymentMethod : paymentMethod
+          },
+          success: function(response) {
+            Swal.fire({
+              title: 'Success!',
+              text: `You have successfully subscribed using ${paymentMethod}!`,
+              icon: 'success'
+            });
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Failed to store subscription data.',
+              icon: 'error'
+            });
+          }
+        });
+      }
+    });
+  }
+</script>
 
 
 <!--  ---------------------------------------------------------------------------------------------------------------------------------->
@@ -276,5 +295,3 @@ foreach($query as $r){
   <!-- /.content-wrapper -->
  
 <?php include '_includes/footer.php'; ?>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

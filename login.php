@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // $adminLogin = 1;
       session_start();
       $_SESSION['email'] = $email;
+      $_SESSION['key'] = "admin123";
 
       // Retrieve the name and id of the admin from the database
       // $adminQuery = "SELECT Name, id FROM admin WHERE email = ?";
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   // Check login as user
-  $userQuery = "SELECT * FROM register WHERE email = ? AND password = ?";
+  $userQuery = "SELECT * FROM user WHERE email = ? AND password = ?";
   $userStmt = mysqli_prepare($connection, $userQuery);
   mysqli_stmt_bind_param($userStmt, "ss", $email, $password);
   mysqli_stmt_execute($userStmt);
@@ -55,9 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // $userLogin = 1;
       session_start();
       $_SESSION['email'] = $email;
+      $_SESSION['key'] = "user123";
 
       // Retrieve the name and id of the user from the database
-      // $userQuery = "SELECT Name, id FROM register WHERE email = ?";
+      // $userQuery = "SELECT Name, id FROM user WHERE email = ?";
       // $userStmt = mysqli_prepare($connection, $userQuery);
       // mysqli_stmt_bind_param($userStmt, "s", $email);
       // mysqli_stmt_execute($userStmt);

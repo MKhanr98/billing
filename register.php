@@ -2,15 +2,15 @@
 include '_includes/connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $uid = $_POST['uid'];
+    $username = $_POST['username'];
     $name = $_POST['name'];
     $cnic = $_POST['cnic'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
     $phone = $_POST['phone'];
 
-    $stmt = $connection->prepare("INSERT INTO register (uid, name, cnic, email, password, phone) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $uid, $name, $cnic, $email, $pass, $phone);
+    $stmt = $connection->prepare("INSERT INTO user (username, name, cnic, email, password, phone) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $username, $name, $cnic, $email, $pass, $phone);
 
     if ($stmt->execute()) {
         echo "<script>alert('Registration Successful');</script>";
@@ -51,12 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <form role='form'method="post">
 
       <div class="form-group">
-                <label for="uid">User ID</label>
+                <label for="username">User Name</label>
                 <div class="input-group">
                 <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-solid fa-id-card"></i></span>
                 </div>
-                <input type="text" class="form-control" id="uid" name="uid" placeholder="Enter User ID">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter User ID">
                 </div>
                 </div>
 

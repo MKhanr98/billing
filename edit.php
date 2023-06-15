@@ -17,14 +17,15 @@ if (!$row) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Get the form data
+  $admin_id = $_SESSION['id'];
   $name = $_POST['name'];
   $price = (int)$_POST['price'];
   $duration = $_POST['duration'];
   $description = $_POST['description'];
 
   // Prepare the update statement
-  $stmt = $connection->prepare("UPDATE pkg SET name = ?, price = ?, duration = ?, description = ? WHERE id = ?");
-  $stmt->bind_param("sdisi", $name, $price, $duration, $description, $id);
+  $stmt = $connection->prepare("UPDATE pkg SET name = ?, price = ?, duration = ?, description = ?, admin_id = ? WHERE id = ?");
+  $stmt->bind_param("sdisii", $name, $price, $duration, $description, $admin_id, $id);
 
   // Execute the update statement
   if ($stmt->execute()) {
