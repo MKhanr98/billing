@@ -55,7 +55,7 @@
         
           <li class="nav-item">
             <a href="addpkg.php" class="nav-link">
-            <i class="nav-icon fas fa-money-bill-wave"></i>
+            <i class="nav-icon fas fa-solid fa-box "></i>
               <p>
                 Add Package
                 <i class="right fas fa-angle-right"></i>
@@ -65,7 +65,8 @@
           </li>    
           <li class="nav-item">
             <a href="subscribers.php" class="nav-link">
-            <i class="nav-icon fas fa-money-bill-wave"></i>
+            <i class="nav-icon fas fa-street-view fa-flip"></i>
+
               <p>
                 View Subscribers
                 <i class="right fas fa-angle-right"></i>
