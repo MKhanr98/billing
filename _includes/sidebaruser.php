@@ -46,9 +46,9 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-solid fa-box"></i>
               <p>
-                Dashboard
+                Packages
                 <i class="right"></i>
               </p>
             </a>
