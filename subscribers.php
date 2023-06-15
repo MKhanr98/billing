@@ -60,11 +60,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                  <th>Person Name </th>
-                  <th>Package Name </th>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>Package Name</th>
                   <th>Price</th>
                   <th>Duration</th>
-                  <th>Description</th>
                   <th>Sub Date</th>
                   <th>Expiry Date</th>
                   <th>Action</th>
@@ -73,25 +73,30 @@
                   </thead>
                   <tbody>
 
-
-                  <?php
-$q = mysqli_query($connection, "SELECT * FROM pkg") or die(mysqli_error($connection));
+<?php
+$q = mysqli_query($connection, "SELECT subs.id, subs.sub_date, subs.exp_date, subs.pay_method,
+user.username, user.email,
+pkg.name, pkg.duration, pkg.price
+FROM subs
+JOIN user ON subs.user_id = user.id
+JOIN pkg ON subs.pkg_id = pkg.id;
+") or die(mysqli_error($connection));
 while($row = mysqli_fetch_array($q))
 {
   echo "<tr>";
-  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['username'] . "</td>";
+  echo "<td>" . $row['email'] . "</td>";
   echo "<td>" . $row['name'] . "</td>";
   echo "<td>" . $row['price'] . "</td>";
   echo "<td>" . $row['duration'] . "</td>";
-  echo "<td>" . $row['description'] . "</td>";
-  echo "<td>" . $row['description'] . "</td>";
-  echo "<td>" . $row['description'] . "</td>";
+  echo "<td>" . $row['sub_date'] . "</td>";
+  echo "<td>" . $row['exp_date'] . "</td>";
 
   echo '<td style="text-align:center">
-          <a href="edit.php?id='.$row['id'].'&table=pkg&page=addpkg.php" class="btn btn-info">
+          <a href="edit.php?id='.$row['id'].'&table=subs&page=subsribers.php" class="btn btn-info">
             <i class="fas fa-edit"></i>
           </a>
-          <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'pkg\')">
+          <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'subs\')">
             <i class="fas fa-trash"></i>
           </button>
         </td>';
@@ -139,11 +144,11 @@ if (result.isConfirmed) {
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th>Person Name </th>
-                  <th>Package Name </th>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>Package Name</th>
                   <th>Price</th>
                   <th>Duration</th>
-                  <th>Description</th>
                   <th>Sub Date</th>
                   <th>Expiry Date</th>
                   <th>Action</th>

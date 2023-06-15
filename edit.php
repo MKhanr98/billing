@@ -90,16 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="price">Price</label>
                     <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" value="<?php echo $row['price']; ?>" required>
                   </div>
-<!-- 
-                  <?php //if ($page == 'cashin.php') : ?>
-                    <div class="form-group col-md-6">
-                      <label for="cheque">Cheque No</label>
-                      <input type="text" class="form-control" id="cheque" name="cheque" placeholder="Cheque No" value="<?php //echo $row['cheque']; ?>" required>
-                    </div>
-                  <?php //endif; ?> -->
-
-                  
-
                   
                   <style>
                   .select2-container .select2-selection--single {
