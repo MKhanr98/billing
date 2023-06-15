@@ -62,7 +62,17 @@
               </p>
             </a>
             
-          </li>       
+          </li>    
+          <li class="nav-item">
+            <a href="subscribers.php" class="nav-link">
+            <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                View Subscribers
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+            
+          </li>    
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
