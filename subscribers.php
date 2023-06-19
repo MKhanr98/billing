@@ -88,57 +88,12 @@ while($row = mysqli_fetch_array($q))
   echo "<td>" . $row['name'] . "</td>";
   echo "<td>" . $row['price'] . "</td>";
   echo "<td>" . $row['duration'] . "</td>";
-  echo "<td class='editable-date' data-column='sub_date' data-id='".$row['id']."'>" . $row['sub_date'] . "</td>";
-  echo "<td class='editable-date' data-column='exp_date' data-id='".$row['id']."'>" . $row['exp_date'] . "</td>";
+  echo "<td>" . $row['sub_date'] . "</td>";
+  echo "<td>" . $row['exp_date'] . "</td>";
 
-  // echo '<td style="text-align:center">
-  //         <a href="edit.php?id='.$row['id'].'&table=subs&page=subsribers.php" class="btn btn-info">
-  //           <i class="fas fa-edit"></i>
-  //         </a>
-  //         <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'subs\')">
-  //           <i class="fas fa-trash"></i>
-  //         </button>
-  //       </td>';
-
-  // echo "</tr>";
 }
 ?>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-function confirmDelete(id, table) {
-Swal.fire({
-title: 'Are you sure?',
-text: "You won't be able to revert this!",
-icon: 'warning',
-showCancelButton: true,
-confirmButtonColor: '#3085d6',
-cancelButtonColor: '#d33',
-confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-if (result.isConfirmed) {
-  // Make an AJAX request to delete.php
-  $.ajax({
-    url: 'delete.php',
-    type: 'POST',
-    data: { id: id, table: table },
-    success: function(response) {
-      if (response === 'success') {
-        Swal.fire('Deleted!', 'The record has been deleted.', 'success');
-        // Refresh the table
-        window.location.replace("addpkg.php");
-      } else {
-        Swal.fire('Error!', 'Failed to delete the record.', 'error');
-      }
-    },
-    error: function() {
-      Swal.fire('Error!', 'An error occurred while deleting the record.', 'error');
-    }
-  });
-}
-});
-}
-</script> -->
                   </tbody>
                   <tfoot>
                   <tr>
@@ -172,7 +127,7 @@ if (result.isConfirmed) {
   </div>
   <!-- /.content-wrapper -->
 <?php include '_includes/table_footer.php'; ?>
-<!-- <script>
+<script>
     $(document).ready(function() {
         // Initialize DataTable
         var table = $('#example1').DataTable();
@@ -188,7 +143,7 @@ if (result.isConfirmed) {
             }
         });
     });
-</script> -->
+</script>
 
 <script>
   $(document).ready(function() {
