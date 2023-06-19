@@ -67,6 +67,7 @@
                   <th>Duration</th>
                   <th>Sub Date</th>
                   <th>Expiry Date</th>
+                  <th>Action</th>
                     
                   </tr>
                   </thead>
@@ -88,23 +89,25 @@ while($row = mysqli_fetch_array($q))
   echo "<td>" . $row['name'] . "</td>";
   echo "<td>" . $row['price'] . "</td>";
   echo "<td>" . $row['duration'] . "</td>";
-  echo "<td class='editable-date' data-column='sub_date' data-id='".$row['id']."'>" . $row['sub_date'] . "</td>";
-  echo "<td class='editable-date' data-column='exp_date' data-id='".$row['id']."'>" . $row['exp_date'] . "</td>";
+  echo "<td>" . $row['sub_date'] . "</td>";
+  echo "<td>" . $row['exp_date'] . "</td>";
 
-  // echo '<td style="text-align:center">
-  //         <a href="edit.php?id='.$row['id'].'&table=subs&page=subsribers.php" class="btn btn-info">
-  //           <i class="fas fa-edit"></i>
-  //         </a>
-  //         <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'subs\')">
-  //           <i class="fas fa-trash"></i>
-  //         </button>
-  //       </td>';
 
-  // echo "</tr>";
+
+  echo '<td style="text-align:center">
+          <a href="edit.php?id='.$row['id'].'&table=subs&page=subsribers.php" class="btn btn-info">
+            <i class="fas fa-edit"></i>
+          </a>
+          <button class="btn btn-danger" onclick="confirmDelete('.$row['id'].', \'subs\')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>';
+
+  echo "</tr>";
 }
 ?>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 function confirmDelete(id, table) {
 Swal.fire({
@@ -138,7 +141,7 @@ if (result.isConfirmed) {
 }
 });
 }
-</script> -->
+</script>
                   </tbody>
                   <tfoot>
                   <tr>
@@ -149,6 +152,7 @@ if (result.isConfirmed) {
                   <th>Duration</th>
                   <th>Sub Date</th>
                   <th>Expiry Date</th>
+                  <th>Action</th>
                     
                   </tr>
                   </tfoot>
@@ -162,8 +166,6 @@ if (result.isConfirmed) {
         </div>
         <!-- /.row -->
 
-
-
 <!-- _________________________________________________________________________ -->
 
       </div>
@@ -172,7 +174,7 @@ if (result.isConfirmed) {
   </div>
   <!-- /.content-wrapper -->
 <?php include '_includes/table_footer.php'; ?>
-<!-- <script>
+<script>
     $(document).ready(function() {
         // Initialize DataTable
         var table = $('#example1').DataTable();
@@ -188,60 +190,4 @@ if (result.isConfirmed) {
             }
         });
     });
-</script> -->
-
-<script>
-  $(document).ready(function() {
-  $(document).on('click', '.editable-date', function() {
-    var $cell = $(this);
-    var column = $cell.data('column');
-    var id = $cell.data('id');
-    var originalValue = $cell.text();
-
-    // Create an input field with the original value and date/time picker
-    var $input = $('<input type="datetime-local" class="edit-date">');
-    $input.val(originalValue); // Set the value to the original datetime
-    $cell.html($input);
-
-    // Focus on the input field and select its content
-    $input.focus();
-
-    $input.on('blur', function() {
-      var newValue = $input.val().trim();
-
-      if (newValue !== originalValue) {
-        updateDatabase(column, id, newValue, function(success) {
-          if (success) {
-            $cell.text(newValue);
-          } else {
-            $cell.text(originalValue);
-            alert('Failed to update the value. Please try again.');
-          }
-        });
-      } else {
-        $cell.text(originalValue);
-      }
-    });
-  });
-
-  function updateDatabase(column, id, newValue, callback) {
-    // Make an AJAX request to update.php
-    $.ajax({
-      url: 'update.php',
-      type: 'POST',
-      data: { column: column, id: id, value: newValue },
-      success: function(response) {
-        if (response === 'success') {
-          callback(true);
-        } else {
-          callback(false);
-        }
-      },
-      error: function() {
-        callback(false);
-      }
-    });
-  }
-});
-
 </script>
