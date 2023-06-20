@@ -65,6 +65,7 @@
                   <th>Package Name</th>
                   <th>Price</th>
                   <th>Duration</th>
+                  <th>Payment</th>
                   <th>Sub Date</th>
                   <th>Expiry Date</th>
                     
@@ -88,6 +89,7 @@ while($row = mysqli_fetch_array($q))
   echo "<td>" . $row['name'] . "</td>";
   echo "<td>" . $row['price'] . "</td>";
   echo "<td>" . $row['duration'] . "</td>";
+  echo "<td>" . $row['pay_method'] . "</td>";
   echo "<td>" . $row['sub_date'] . "</td>";
   echo "<td>" . $row['exp_date'] . "</td>";
 
@@ -102,6 +104,7 @@ while($row = mysqli_fetch_array($q))
                   <th>Package Name</th>
                   <th>Price</th>
                   <th>Duration</th>
+                  <th>Payment</th>
                   <th>Sub Date</th>
                   <th>Expiry Date</th>
                     
